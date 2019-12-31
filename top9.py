@@ -2,7 +2,7 @@
 An Instagram Top 9 generator that doesn't require connecting your account
 to an untrustworthy 3rd party Instagram app.
 
-Install the requirements with `pip3 install igramscraper Pillow requests click`
+Install the requirements with `pip3 install igramscraper Pillow click`
 then run `python3 top9.py`
 
 When done, you will have a YOURUSERNAME-top9.jpg in your working directory.
