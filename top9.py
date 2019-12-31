@@ -2,8 +2,8 @@
 An Instagram Top 9 generator that doesn't require connecting your account
 to an untrustworthy 3rd party Instagram app.
 
-Install the requirements with `pip install igramscraper Pillow requests click`
-then run `python top9.py`
+Install the requirements with `pip3 install igramscraper Pillow requests click`
+then run `python3 top9.py`
 
 When done, you will have a YOURUSERNAME-top9.jpg in your working directory.
 """
@@ -23,7 +23,14 @@ instagram = Instagram()
     prompt="Your Instagram account (without @)",
     help="The instagram username to create a top 9 for",
 )
-def top9(user):
+@click.option(
+    "--password",
+    help="The password for the instagram account; Only needed if it is private",
+)
+def top9(user, password=None):
+    if password is not None:
+        instagram.with_credentials(user, password)
+        instagram.login()
     now = datetime.utcnow()
     if now.month > 7:
         this_year = now.year
