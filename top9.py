@@ -48,7 +48,7 @@ def top9(user):
 
     top9 = sorted(this_year_photos, key=lambda post: -post.likes_count)[:9]
 
-    img = Image.new("RGB", (1080, 1080))  # , '#fff')
+    img = Image.new("RGB", (1080, 1080))
     for i, post in enumerate(top9):
         tile = Image.open(requests.get(post.image_high_resolution_url, stream=True).raw)
         if tile.size[0] > tile.size[1]:
