@@ -24,6 +24,10 @@ instagram = Instagram()
     help="The instagram username to create a top 9 for",
 )
 @click.option(
+    "--login-user",
+    help="The instagram username to login with, defaults to the value of --user",
+)
+@click.option(
     "--password",
     help="The password for the instagram account; Only needed if it is private",
 )
@@ -31,9 +35,9 @@ instagram = Instagram()
     "--tfa",
     help="Use two factor auth during login",
 )
-def top9(user, password=None, tfa=False):
+def top9(user, password=None, tfa=False, login_user=None):
     if password is not None:
-        instagram.with_credentials(user, password)
+        instagram.with_credentials(login_user or user, password)
         instagram.login(two_step_verificator=tfa)
     now = datetime.utcnow()
     if now.month > 7:
