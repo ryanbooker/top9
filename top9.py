@@ -29,6 +29,8 @@ instagram = Instagram()
 )
 @click.option(
     "--password",
+    prompt="Your IG password",
+    hide_input=True,
     help="The password for the instagram account; Only needed if it is private",
 )
 @click.option(
