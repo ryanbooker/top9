@@ -25,21 +25,16 @@ instagram = Instagram()
 )
 @click.option(
     "--login-user",
-    help="The instagram username to login with, defaults to the value of --user",
-)
-@click.option(
-    "--password",
-    prompt="Your IG password",
-    hide_input=True,
-    help="The password for the instagram account; Only needed if it is private",
+    help="The instagram username to login with. Doesn't log in if omitted.",
 )
 @click.option(
     "--tfa",
     help="Use two factor auth during login",
 )
-def top9(user, password=None, tfa=False, login_user=None):
-    if password is not None:
-        instagram.with_credentials(login_user or user, password)
+def top9(user, tfa=False, login_user=None):
+    if login_user:
+        password = click.prompt("Your Instagram password")
+        instagram.with_credentials(login_user, password)
         instagram.login(two_step_verificator=tfa)
     now = datetime.utcnow()
     if now.month > 7:
