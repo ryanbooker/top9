@@ -44,12 +44,17 @@ def top9(user, tfa=False, login_user=None):
 
     posts = None
     count = 0
+    prev = None
     while (
         posts is None
         or datetime.fromtimestamp(posts[-1].created_time).year >= this_year
     ):
         count += 50
         posts = instagram.get_medias(user, count)
+        last = datetime.fromtimestamp(posts[-1].created_time)
+        if prev == last:
+            break
+        prev = last
 
     this_year_photos = [
         post
