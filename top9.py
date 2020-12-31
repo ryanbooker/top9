@@ -60,7 +60,7 @@ def top9(user, tfa=False, login_user=None):
         post
         for post in posts
         if datetime.fromtimestamp(post.created_time).year == this_year
-        and post.type == post.TYPE_IMAGE
+        and post.type in (post.TYPE_IMAGE, post.TYPE_SIDECAR)
     ]
 
     top9 = sorted(this_year_photos, key=lambda post: -post.likes_count)[:9]
